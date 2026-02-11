@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخريطة التفاعلية للمواقع الأثرية في سلطنة عمان</title>
+
+<style>
+body{
+    margin:0;
+    font-family:"Tahoma", sans-serif;
+    direction:rtl;
+    background:linear-gradient(to bottom,#e0f2f1,#ffffff);
+}
+
+header{
+    background:#004d40;
+    color:white;
+    text-align:center;
+    padding:18px;
+    font-size:22px;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.map{
+    flex:1;
+    min-width:320px;
+    padding:20px;
+    text-align:center;
+}
+
+.info{
+    flex:1;
+    min-width:320px;
+    background:white;
+    padding:25px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+    border-radius:10px;
+    margin:20px;
+}
+
+svg path{
+    fill:#80cbc4;
+    stroke:white;
+    stroke-width:2;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+svg path:hover{
+    fill:#00796b;
+}
+
+.active{
+    fill:#004d40 !important;
+}
+
+h2{
+    color:#004d40;
+}
+
+ul{
+    line-height:1.9;
+    font-size:17px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+الخريطة التفاعلية لأبرز المواقع الأثرية في سلطنة عمان
+</header>
+
+<div class="container">
+
+<div class="map">
+
+<svg width="400" height="650" viewBox="0 0 400 650">
+
+<!-- مسندم -->
+<path id="musandam"
+d="M200 20 L260 20 L250 80 L190 80 Z"
+onclick="showInfo('musandam', this)" />
+
+<!-- شمال الباطنة -->
+<path id="north_batinah"
+d="M160 120 L280 120 L260 170 L140 170 Z"
+onclick="showInfo('north_batinah', this)" />
+
+<!-- جنوب الباطنة -->
+<path id="south_batinah"
+d="M150 180 L270 180 L250 230 L130 230 Z"
+onclick="showInfo('south_batinah', this)" />
+
+<!-- الداخلية -->
+<path id="dakhiliyah"
+d="M120 250 L300 250 L280 360 L100 360 Z"
+onclick="showInfo('dakhiliyah', this)" />
+
+<!-- الشرقية -->
+<path id="sharqiyah"
+d="M300 260 L380 290 L360 430 L260 360 Z"
+onclick="showInfo('sharqiyah', this)" />
+
+<!-- الظاهرة -->
+<path id="dhahirah"
+d="M40 260 L120 250 L100 360 L20 360 Z"
+onclick="showInfo('dhahirah', this)" />
+
+<!-- الوسطى -->
+<path id="wusta"
+d="M160 380 L300 380 L280 500 L140 500 Z"
+onclick="showInfo('wusta', this)" />
+
+<!-- ظفار -->
+<path id="dhofar"
+d="M80 520 L300 520 L260 640 L40 640 Z"
+onclick="showInfo('dhofar', this)" />
+
+</svg>
+
+<p>اضغط على أي محافظة لعرض أهم المواقع الأثرية</p>
+
+</div>
+
+<div class="info" id="infoBox">
+<h2>اختر محافظة</h2>
+<p>اضغط على المحافظة من الخريطة لعرض المعلومات.</p>
+</div>
+
+</div>
+
+<script>
+
+const data = {
+
+musandam:{
+name:"محافظة مسندم",
+sites:[
+"خور نجد",
+"خصب",
+"جزيرة سلامة وبناتها"
+]
+},
+
+north_batinah:{
+name:"محافظة شمال الباطنة",
+sites:[
+"قلعة صحار",
+"موقع وادي الجزي",
+"أرض الحور"
+]
+},
+
+south_batinah:{
+name:"محافظة جنوب الباطنة",
+sites:[
+"الرستاق",
+"عين الكسفة",
+"وادي بني عوف"
+]
+},
+
+dakhiliyah:{
+name:"محافظة الداخلية",
+sites:[
+"قلعة نزوى",
+"بهلاء (موقع أثري)",
+"الجبل الأخضر",
+"فلج الملكي"
+]
+},
+
+sharqiyah:{
+name:"محافظة الشرقية",
+sites:[
+"رمال وهيبة",
+"رأس الحد",
+"وادي بني خالد",
+"جزيرة مصيرة"
+]
+},
+
+dhahirah:{
+name:"محافظة الظاهرة",
+sites:[
+"عبري",
+"آثار وادي العين",
+"مقابر بات"
+]
+},
+
+wusta:{
+name:"محافظة الوسطى",
+sites:[
+"حديقة الصخور بالدقم",
+"جزيرة الحلانيات",
+"رأس مدركة"
+]
+},
+
+dhofar:{
+name:"محافظة ظفار",
+sites:[
+"سمهرم (خور روري)",
+"شجرة اللبان",
+"محمية جبل سمحان",
+"كهف المرنيف"
+]
+}
+
+};
+
+function showInfo(region, element){
+
+// إزالة التحديد السابق
+document.querySelectorAll("svg path").forEach(p=>{
+p.classList.remove("active");
+});
+
+// تفعيل المحافظة الحالية
+element.classList.add("active");
+
+const info = data[region];
+
+let content = `<h2>${info.name}</h2><ul>`;
+
+info.sites.forEach(site=>{
+content += `<li>${site}</li>`;
+});
+
+content += "</ul>";
+
+document.getElementById("infoBox").innerHTML = content;
+
+}
+
+</script>
+
+</body>
+</html>
