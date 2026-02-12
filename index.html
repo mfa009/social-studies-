@@ -4,6 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الخريطة التفاعلية للمواقع الأثرية في سلطنة عمان</title>
+<style>
+body{
+margin:0;
+font-family:"Tahoma",sans-serif;
+direction:rtl;
+background:#f5f5f5;
+}
+
+/* صفحة الغلاف */
+.cover{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(to bottom,#004d40,#00796b);
+color:white;
+text-align:center;
+}
+
+.cover h1{
+font-size:32px;
+margin-bottom:20px;
+}
+
+.cover button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:white;
+color:#004d40;
+}
+
+/* صفحة الخريطة */
+.map-page{
+display:none;
+padding:20px;
+text-align:center;
+}
+
+.map-container{
+position:relative;
+display:inline-block;
+max-width:800px;
+}
+
+.map-container img{
+width:100%;
+}
+
+/* نقاط المحافظات */
+.point{
+position:absolute;
+width:18px;
+height:18px;
+background:red;
+border-radius:50%;
+cursor:pointer;
+border:2px solid white;
+}
+
+/* صندوق المعلومات */
+.info-box{
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+text-align:right;
+}
+
+h2{
+color:#004d40;
+}
+
+ul{
+line-height:1.9;
+font-size:17px;
+}
+</style>
+</head>
+
+<body>
 
 <style>
 body{
@@ -102,10 +190,20 @@ onclick="showInfo('south_batinah', this)" />
 d="M120 250 L300 250 L280 360 L100 360 Z"
 onclick="showInfo('dakhiliyah', this)" />
 
-<!-- الشرقية -->
-<path id="sharqiyah"
+<!-- مسقط -->
+<path id="muscat"
+d="M120 250 L300 250 L280 360 L100 220 Z"
+onclick="showInfo('muscat', this)" />
+
+<!-- الشرقية شمال -->
+<path id=" north sharqiyah"
+d="M300 260 L380 290 L360 360 L260 360 Z"
+onclick="showInfo('north sharqiyah', this)" />
+    
+<!-- الشرقية جنوب -->
+<path id="south sharqiyah"
 d="M300 260 L380 290 L360 430 L260 360 Z"
-onclick="showInfo('sharqiyah', this)" />
+onclick="showInfo('south sharqiyah', this)" />
 
 <!-- الظاهرة -->
 <path id="dhahirah"
@@ -176,8 +274,18 @@ sites:[
 ]
 },
 
-sharqiyah:{
-name:"محافظة الشرقية",
+sharqiyahnorth:{
+name:"محافظة شمال الشرقية",
+sites:[
+"رمال وهيبة",
+"رأس الحد",
+"وادي بني خالد",
+"جزيرة مصيرة"
+]
+},
+
+sharqiyahsouth:{
+name:"محافظة جنوب الشرقية",
 sites:[
 "رمال وهيبة",
 "رأس الحد",
